@@ -1,0 +1,170 @@
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
+
+const images = [
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820__480.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_1280.jpg",
+    description: "Hokkaido Flower",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677__340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677_1280.jpg",
+    description: "Container Haulage Freight",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785__340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785_1280.jpg",
+    description: "Aerial Beach View",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619__340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619_1280.jpg",
+    description: "Flower Blooms",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334__340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334_1280.jpg",
+    description: "Alpine Mountains",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571__340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571_1280.jpg",
+    description: "Mountain Lake Sailing",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272__340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg",
+    description: "Alpine Spring Meadows",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255__340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255_1280.jpg",
+    description: "Nature Landscape",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843__340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg",
+    description: "Lighthouse Coast Sea",
+  },
+];
+
+/* preview — посилання на маленьку версію зображення для картки галереї 
+original — посилання на велику версію зображення для модального вікна
+description — текстовий опис зображення, для атрибута alt малого зображення та підпису великого зображення в модалці. */
+
+const container = document.querySelector(".gallery");
+
+
+/* <li class="gallery-item">
+            <a class="gallery-link" href="large-image.jpg">
+                <img class="gallery-image" src="small-image.jpg" alt="Image description" />
+            </a>
+        </li> */
+
+function createMarkup(arr) {
+  return arr
+    .map(({ preview, original, description }) => {
+      return `<li class="gallery-item">
+      <a class="gallery-link" href="large-image.jpg">
+        <img
+          class="gallery-image"
+          src="${preview}"
+          data-source="${original}"
+          alt="${description}"
+        />
+      </a>
+    </li>`;
+    })
+    .join("");
+}
+
+container.innerHTML = createMarkup(images);
+
+const gallery= new SimpleLightbox('.gallery-item a', {
+  captions: true,               
+  captionsData: 'alt',
+  captionDelay: 250,             
+});
+
+// container.addEventListener("click", handleImgClick);
+
+// function handleImgClick(evt) {
+//   evt.preventDefault();
+
+//   if (evt.target === evt.currentTarget) {
+//     return;
+//   }
+
+//   console.log(evt.target.dataset.source);
+
+  /* ------------------- Додаю модальне вікно  -------------------*/
+
+//      const closeModal = (evt) => {
+//     if (evt.code === "Escape") {
+//       instance.close();
+//     }
+//       return;
+//   };
+    
+//   const instance = basicLightbox.create(`
+// <img
+//           class="big-image"
+//           src="${evt.target.dataset.source}"
+//         />
+// `,
+//       {
+//           onShow: (instance) => {
+//               document.addEventListener("keydown", closeModal);
+//           },
+//            onClose: (instance) => {
+//               document.removeEventListener("keydown", closeModal);
+//             }
+//       },
+//   );
+//   instance.show();
+
+// }
+
+/* -------------------- Додаю стилі ----------------- */
+
+const items = document.querySelectorAll(".gallery-item");
+
+items.forEach((item) => {
+  item.style.maxWidth = "360px";
+  item.style.marginTop = "15px";
+  item.style.marginRight = "15px";
+
+  return;
+});
+
+const pictures = document.querySelectorAll(".gallery-image");
+
+pictures.forEach((img) => {
+  img.style.maxWidth = "100%";
+  img.style.maxHeight = "100%";
+});
+
+container.style.display = "flex";
+container.style.flexWrap = "wrap";
+container.style.listStyleType = "none";
+container.style.justifyContent = "center";
+container.style.alignItems = "center";
