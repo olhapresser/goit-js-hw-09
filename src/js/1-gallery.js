@@ -84,7 +84,7 @@ function createMarkup(arr) {
   return arr
     .map(({ preview, original, description }) => {
       return `<li class="gallery-item">
-      <a class="gallery-link" href="large-image.jpg">
+      <a class="gallery-link" href="${original}">
         <img
           class="gallery-image"
           src="${preview}"
@@ -99,7 +99,7 @@ function createMarkup(arr) {
 
 container.innerHTML = createMarkup(images);
 
-const gallery= new SimpleLightbox('.gallery-item a', {
+const modal = new SimpleLightbox('.gallery-item a', {
   captions: true,               
   captionsData: 'alt',
   captionDelay: 250,             
