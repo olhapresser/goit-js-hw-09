@@ -99,50 +99,11 @@ function createMarkup(arr) {
 
 container.innerHTML = createMarkup(images);
 
-const modal = new SimpleLightbox('.gallery-item a', {
+const modal = new SimpleLightbox('.gallery a', {
   captions: true,               
   captionsData: 'alt',
   captionDelay: 250,             
 });
-
-// container.addEventListener("click", handleImgClick);
-
-// function handleImgClick(evt) {
-//   evt.preventDefault();
-
-//   if (evt.target === evt.currentTarget) {
-//     return;
-//   }
-
-//   console.log(evt.target.dataset.source);
-
-  /* ------------------- Додаю модальне вікно  -------------------*/
-
-//      const closeModal = (evt) => {
-//     if (evt.code === "Escape") {
-//       instance.close();
-//     }
-//       return;
-//   };
-    
-//   const instance = basicLightbox.create(`
-// <img
-//           class="big-image"
-//           src="${evt.target.dataset.source}"
-//         />
-// `,
-//       {
-//           onShow: (instance) => {
-//               document.addEventListener("keydown", closeModal);
-//           },
-//            onClose: (instance) => {
-//               document.removeEventListener("keydown", closeModal);
-//             }
-//       },
-//   );
-//   instance.show();
-
-// }
 
 /* -------------------- Додаю стилі ----------------- */
 

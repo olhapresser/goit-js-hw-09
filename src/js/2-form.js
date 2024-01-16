@@ -1,7 +1,7 @@
 const STORAGE_KEY = 'feedback-msg';
 
 const form = document.querySelector('.feedback-form');
-const email = document.querySelector('.email');
+const email = document.querySelector('[name="email"]');
 const textarea = form.querySelector('textarea');
 
 form.addEventListener('submit', onFormSubmit);
@@ -12,8 +12,8 @@ function onFormInput(evt) {
       evt.preventDefault();
  
   const formData = {
-    email: evt.target.value,
-    message: evt.target.value,
+    email: email.value.trim(),
+    message: textarea.value.trim(),
   };
     
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
@@ -24,7 +24,13 @@ function onFormSubmit(evt) {
   evt.preventDefault();
 
   localStorage.removeItem(STORAGE_KEY);
-  evt.currentTarget.reset();
+    evt.currentTarget.reset();
+    
+
+    if(!email.value.trim() || !textarea.value.trim()) {
+    alert('Будь ласка, заповніть всі поля форми.');
+    return;
+  }
 }
 
 function populateData() {
@@ -35,4 +41,5 @@ function populateData() {
     email.value = formData.email;
     textarea.value = formData.message;
   }
-}
+};
+populateData();
