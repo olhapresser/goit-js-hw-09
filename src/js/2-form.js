@@ -9,8 +9,6 @@ form.addEventListener('input', onFormInput);
 
 
 function onFormInput(evt) {
-      evt.preventDefault();
- 
   const formData = {
     email: email.value.trim(),
     message: textarea.value.trim(),
@@ -22,15 +20,20 @@ function onFormInput(evt) {
 
 function onFormSubmit(evt) {
   evt.preventDefault();
-
-  localStorage.removeItem(STORAGE_KEY);
-    evt.currentTarget.reset();
-    
-
     if(!email.value.trim() || !textarea.value.trim()) {
     alert('Будь ласка, заповніть всі поля форми.');
     return;
-  }
+    }
+
+  const formData = {
+    email: email.value.trim(),
+    message: textarea.value.trim(),
+  };
+
+  console.log(formData);
+  
+  localStorage.removeItem(STORAGE_KEY);
+    evt.currentTarget.reset();
 }
 
 function populateData() {
